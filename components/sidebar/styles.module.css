@@ -1,0 +1,68 @@
+.nav {
+	width: clamp(80px, 10vw, 100px);
+	background-color: #fff;
+	height: 100vh;
+	position: fixed;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	min-width: 5rem;
+	box-shadow: 0 0 1rem rgb(26 26 44 / 5%);
+	justify-content: space-between;
+	padding: 3rem 0;
+}
+
+.logoContainer {
+	width: 2rem;
+	position: relative;
+}
+
+.navLinks,
+.profileIconContainer {
+	width: 2rem;
+	list-style: none;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+}
+
+.navLinks li {
+	margin-inline: auto;
+	margin-bottom: 1.75rem;
+}
+
+.navLinks {
+	width: 36px;
+}
+
+.navLinks svg {
+	width: 30px;
+	transition: transform 0.15s ease;
+}
+
+.navLink {
+	color: #1a1a2c;
+}
+
+.navLink__active svg {
+	fill: #1a1a2c;
+}
+
+.navLink svg {
+	fill: #fff;
+	stroke: #1a1a2c;
+}
+
+.navLinks svg:hover,
+.profileIconContainer svg:hover {
+	transform: scale(1.15);
+}
+
+.profileIconContainer {
+	margin-bottom: 1rem;
+}
+
+.profileIconContainer svg {
+	width: 33px;
+	transition: transform 0.15s ease;
+}
