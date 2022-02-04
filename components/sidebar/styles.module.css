@@ -1,6 +1,6 @@
 .nav {
 	width: clamp(80px, 10vw, 100px);
-	background-color: #fff;
+	background-color: var(--color-white);
 	height: 100vh;
 	position: fixed;
 	display: flex;
@@ -41,16 +41,16 @@
 }
 
 .navLink {
-	color: #1a1a2c;
+	color: var(--color-dark);
 }
 
 .navLink__active svg {
-	fill: #1a1a2c;
+	fill: var(--color-dark);
 }
 
 .navLink svg {
-	fill: #fff;
-	stroke: #1a1a2c;
+	fill: var(--color-white);
+	stroke: var(--color-dark);
 }
 
 .navLinks svg:hover,

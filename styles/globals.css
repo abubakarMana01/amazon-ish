@@ -10,5 +10,14 @@ body {
 	margin: 0;
 	font-family: "Nunito Sans", sans-serif;
 	font-size: 1rem;
-	background-color: #fafafa;
+	background-color: var(--color-grey);
+}
+
+:root {
+	--color-primary: #f9992d;
+	--color-grey: #fafafa;
+	--color-dark: #1a1a2c;
+	--color-white: #fff;
+	--color-mediumGrey: #eaeaea;
+	--color-darkBlue: #1a1a2c;
 }
