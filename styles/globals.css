@@ -8,16 +8,42 @@ html,
 body {
 	padding: 0;
 	margin: 0;
-	font-family: "Nunito Sans", sans-serif;
+	font-family: var(--font-sans);
 	font-size: 1rem;
 	background-color: var(--color-grey);
+	color: var(--color-dark);
+}
+
+body::-webkit-scrollbar {
+	width: 12px;
+}
+
+body::-webkit-scrollbar-thumb {
+	background-color: rgb(197, 197, 197);
+	border: 2px solid var(--color-mediumGrey);
+	border-radius: 5px;
+}
+body::-webkit-scrollbar-track {
+	background: var(--color-mediumGrey);
 }
 
 :root {
-	--color-primary: #f9992d;
+	--color-white: #fff;
+	--color-primary: #f99900;
 	--color-grey: #fafafa;
 	--color-dark: #1a1a2c;
-	--color-white: #fff;
 	--color-mediumGrey: #eaeaea;
-	--color-darkBlue: #1a1a2c;
+	--color-darkGrey: #616161;
+
+	--font-sans: "Nunito Sans", sans-serif;
+}
+
+main {
+	padding-left: clamp(80px, 10vw, 100px);
+}
+
+@media (max-width: 550px) {
+	main {
+		padding-left: 0;
+	}
 }

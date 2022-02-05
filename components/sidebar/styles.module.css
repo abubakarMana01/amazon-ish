@@ -66,3 +66,9 @@
 	width: 33px;
 	transition: transform 0.15s ease;
 }
+
+@media (max-width: 550px) {
+	.nav {
+		display: none;
+	}
+}

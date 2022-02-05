@@ -1,18 +1,25 @@
 import "../styles/globals.css";
 import type { AppProps } from "next/app";
-import { Sidebar } from "components";
+import { Disclaimer, Footer, Sidebar } from "components";
 import Head from "next/head";
+import { AppProvider } from "contexts";
 
 function MyApp({ Component, pageProps }: AppProps) {
 	return (
-		<>
-			<Head>
-				<title>Amazon-ish</title>
-				<link rel="icon" href="/favicon.png" />
-			</Head>
-			<Sidebar />
-			<Component {...pageProps} />;
-		</>
+		<AppProvider>
+			<>
+				<Head key="head">
+					<title>Amazon-ish</title>
+					<link rel="icon" href="/favicon.png" />
+				</Head>
+				<Sidebar />
+
+				<Component {...pageProps} />
+
+				<Disclaimer />
+				<Footer />
+			</>
+		</AppProvider>
 	);
 }
 

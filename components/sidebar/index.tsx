@@ -5,7 +5,7 @@ import Link from "next/link";
 import styles from "./styles.module.css";
 import Logo from "assets/amazon-logo-sm.svg";
 import {
-	HomeRounded,
+	Home,
 	BookmarkRounded,
 	ShoppingCartRounded,
 	WatchLaterRounded,
@@ -34,7 +34,7 @@ export default function Sidebar() {
 							}
 						>
 							<Tooltip title="Home" placement="right" arrow>
-								<HomeRounded style={{ width: "36" }} fontSize="large" />
+								<Home style={{ width: "36" }} fontSize="large" />
 							</Tooltip>
 						</a>
 					</Link>

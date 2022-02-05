@@ -1,0 +1,18 @@
+.disclaimer__container {
+	background-color: var(--color-dark);
+	color: var(--color-white);
+	font-size: 1rem;
+	padding: 1rem 3rem;
+	margin-left: clamp(80px, 10vw, 100px);
+}
+
+.disclaimer__container span {
+	font-weight: 700;
+}
+
+@media (max-width: 550px) {
+	.disclaimer__container {
+		padding-inline: 1.5rem;
+		margin-left: 0;
+	}
+}

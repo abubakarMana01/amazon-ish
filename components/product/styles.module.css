@@ -1,0 +1,129 @@
+.product__container {
+	background-color: var(--color-white);
+	border-radius: 0.5rem;
+	box-shadow: 0 0 1rem rgb(26 26 44 / 5%);
+	overflow: hidden;
+	transition: box-shadow 0.35s ease;
+	display: flex;
+	flex-direction: column;
+	position: relative;
+}
+
+.product__container:hover {
+	box-shadow: 0 1rem 1rem -0.5rem rgb(26 26 44 / 10%);
+}
+
+.product__banner {
+	position: absolute;
+	top: 0;
+	right: 0;
+	background-color: var(--color-primary);
+	display: grid;
+	place-items: center;
+	padding: 0.33rem 3rem;
+	z-index: 3;
+	transform: translate(50%, -100%) rotate(45deg);
+	transform-origin: 0 0;
+}
+
+.product__banner span {
+	color: var(--color-white);
+	font-weight: 600;
+	font-size: 0.85rem;
+}
+
+.product__imageContainer {
+	position: relative;
+	width: 100%;
+	height: auto;
+	display: grid;
+	place-items: center;
+	padding: 1.5rem;
+}
+
+.product__imageContainer::before {
+	position: absolute;
+	content: "";
+	background-color: rgba(0, 0, 0, 0.1);
+	inset: 0;
+	z-index: 0;
+	opacity: 0;
+	transition: opacity 0.35s ease;
+}
+
+.product__imageContainer::after {
+	cursor: pointer;
+	position: absolute;
+	content: "View product";
+	background-color: var(--color-white);
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	white-space: nowrap;
+	padding: 0.5rem 1rem;
+	background: #fff;
+	box-shadow: 0 1rem 1rem -0.5rem rgb(26 26 44 / 50%);
+	border-radius: 0.5rem;
+	opacity: 0;
+	z-index: 0;
+	transition: opacity 0.35s ease;
+}
+
+.product__container:hover .product__imageContainer::before {
+	opacity: 1;
+	z-index: 1;
+}
+.product__container:hover .product__imageContainer::after {
+	opacity: 1;
+	z-index: 2;
+}
+
+.product__details {
+	padding: 1rem;
+	flex: 1;
+	padding-bottom: 3rem;
+}
+
+.product__category {
+	background-color: var(--color-grey);
+	width: fit-content;
+	padding: 0.25rem 0.5rem;
+	margin-bottom: 0.75rem;
+	border-radius: 1rem;
+	font-size: 0.5rem;
+	text-transform: uppercase;
+	letter-spacing: 2px;
+	background: rgba(26, 26, 44, 0.05);
+}
+
+.product__title {
+	font-size: 1.12rem;
+	font-weight: 700;
+	line-height: 1.2;
+	margin-bottom: 1rem;
+}
+
+.product__priceAndRatingContainer {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	margin-bottom: 0.5rem;
+	position: absolute;
+	bottom: 1rem;
+}
+
+.product__priceAndRatingContainer h3 {
+	font-size: 1.5rem;
+	font-weight: 900;
+}
+
+.product__ratingContainer {
+	display: flex;
+	align-items: center;
+	gap: 4px;
+}
+
+.product__ratingContainer svg {
+	width: 1.125rem;
+	fill: var(--color-primary);
+}
