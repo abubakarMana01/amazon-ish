@@ -35,6 +35,10 @@
 	font-size: 0.85rem;
 }
 
+.footer__contentLinks a:hover {
+	opacity: 1;
+}
+
 .footer__bottom {
 	position: relative;
 	display: flex;
@@ -62,6 +66,13 @@
 	border-bottom: 1px dotted var(--color-primary);
 }
 
+.footer__dropdownContainer {
+	margin-left: auto;
+	display: flex;
+	align-items: center;
+	gap: 1rem;
+}
+
 @media (max-width: 550px) {
 	.footer__container {
 		margin-left: 0;
@@ -76,5 +87,10 @@
 	}
 	.footer__copyright {
 		margin-top: 0.5rem;
+	}
+	.footer__dropdownContainer {
+		margin-inline: auto;
+		margin-top: 2rem;
+		margin-bottom: 1rem;
 	}
 }

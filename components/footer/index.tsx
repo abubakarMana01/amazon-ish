@@ -2,6 +2,7 @@ import Image from "next/image";
 import React from "react";
 import styles from "./styles.module.css";
 import Logo from "assets/amazon-logo.svg";
+import { Dropdown } from "components";
 
 export default function Footer() {
 	return (
@@ -78,6 +79,13 @@ export default function Footer() {
 					&copy; 2022 | Developed by{" "}
 					<a href="https://github.com/abubakarMana01">Abubakar Mana</a>
 				</p>
+
+				<div className={styles.footer__dropdownContainer}>
+					<Dropdown options={["English", "French", "German", "Italian"]} />
+					<Dropdown
+						options={["$ - USD", "₹ - INR", "£ - GBP", "€ - EUR", "¥ - JPY"]}
+					/>
+				</div>
 			</div>
 		</footer>
 	);
