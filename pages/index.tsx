@@ -9,14 +9,11 @@ import slide3 from "assets/carousel/3.jpg";
 import slide4 from "assets/carousel/4.jpg";
 import slide5 from "assets/carousel/5.jpg";
 import slide6 from "assets/carousel/6.jpg";
-import { useState } from "react";
 import { useAppContext } from "contexts";
 
 const Home = ({ products }: { products: [] }) => {
 	const carouselImages = [slide1, slide2, slide3, slide4, slide5, slide6];
 	products = products.sort(() => Math.random() - 0.5);
-
-	const [productsList, setProductsList] = useState(products);
 
 	const appContext: any = useAppContext();
 
@@ -44,7 +41,7 @@ const Home = ({ products }: { products: [] }) => {
 			<Categories />
 
 			<section className={styles.products__container}>
-				{productsList.map((product: any) => {
+				{products.map((product: any) => {
 					if (appContext.currentCategory === "all categories") {
 						return <Product key={product.id} data={product} />;
 					} else if (product.category === appContext.currentCategory) {
