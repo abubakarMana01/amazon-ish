@@ -1,25 +1,20 @@
 /* eslint-disable @next/next/no-img-element */
 import {
 	AddShoppingCartRounded,
-	Bookmark,
 	BookmarkRounded,
 	LabelImportantRounded,
-	ShoppingCart,
-	ShoppingCartOutlined,
 } from "@mui/icons-material";
 import { Tooltip } from "@mui/material";
 import { Header } from "components";
-import { colors } from "constants";
+import { colors } from "constants/index";
 import { GetStaticPropsContext } from "next";
-import Image from "next/image";
 import React from "react";
-import ReactTooltip from "react-tooltip";
 import styles from "./styles.module.css";
 
 export default function ProductDetail({
 	product,
 }: {
-	product: { description: string };
+	product: { description: string; image: string; title: string; price: string };
 }) {
 	// Split the product description string to have an array
 	const description = product.description;
