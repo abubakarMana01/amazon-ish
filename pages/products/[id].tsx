@@ -1,4 +1,7 @@
 /* eslint-disable @next/next/no-img-element */
+import React from "react";
+import styles from "./styles.module.css";
+import { GetStaticPropsContext } from "next";
 import {
 	AddShoppingCartRounded,
 	BookmarkRounded,
@@ -8,15 +11,13 @@ import { Tooltip } from "@mui/material";
 import { Header, Product } from "components";
 import { colors } from "constants/index";
 import { useAppContext } from "contexts";
-import { GetStaticPropsContext } from "next";
-import React from "react";
-import styles from "./styles.module.css";
 
 export default function ProductDetail({
 	product,
 	suggestedProducts,
 }: {
 	product: {
+		id: string;
 		description: string;
 		image: string;
 		title: string;
@@ -34,7 +35,10 @@ export default function ProductDetail({
 	// Filter suggestions to have only products with the same category
 	let filteredSuggestions: any[] = [];
 	suggestedProducts.forEach((suggestedProduct: any) => {
-		if (suggestedProduct.category === product.category) {
+		if (
+			suggestedProduct.category === product.category &&
+			suggestedProduct.id !== product.id
+		) {
 			filteredSuggestions.push(suggestedProduct);
 		}
 	});
@@ -95,19 +99,21 @@ export default function ProductDetail({
 				</div>
 			</section>
 
-			<section className={styles.productDetail__suggestionsContainer}>
-				<h2>You might also like</h2>
-				<div className={styles.product__suggestions}>
-					{filteredSuggestions?.slice(0, 3).map((suggestedProduct: any) => {
-						if (suggestedProduct.category === product.category) {
-							return (
-								<Product key={suggestedProduct.id} data={suggestedProduct} />
-							);
-						}
-						return null;
-					})}
-				</div>
-			</section>
+			{filteredSuggestions.length && (
+				<section className={styles.productDetail__suggestionsContainer}>
+					<h2>You might also like</h2>
+					<div className={styles.product__suggestions}>
+						{filteredSuggestions?.slice(0, 3).map((suggestedProduct: any) => {
+							if (suggestedProduct.category === product.category) {
+								return (
+									<Product key={suggestedProduct.id} data={suggestedProduct} />
+								);
+							}
+							return null;
+						})}
+					</div>
+				</section>
+			)}
 		</main>
 	);
 }
@@ -131,11 +137,13 @@ export async function getStaticPaths() {
 export async function getStaticProps(context: GetStaticPropsContext) {
 	const id = context.params?.id;
 
+	// Fetch single product
 	const productResponse = await fetch(
 		"https://fakestoreapi.com/products/" + id
 	);
 	const product = await productResponse.json();
 
+	// Fetch all products to be filtered
 	const productsResponse = await fetch("https://fakestoreapi.com/products");
 	const products = await productsResponse.json();
 

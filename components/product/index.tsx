@@ -5,6 +5,7 @@ import React from "react";
 import styles from "./styles.module.css";
 import TextTruncate from "react-text-truncate";
 import Link from "next/link";
+import { motion } from "framer-motion";
 
 interface productTypes {
 	id: string;
@@ -19,7 +20,7 @@ export default function Product({ data }: { data: productTypes }) {
 	const router = useRouter();
 
 	return (
-		<article className={styles.product__container}>
+		<motion.article layout className={styles.product__container}>
 			<Link href={"/products/" + data.id}>
 				<a className={styles.product__link}>
 					<div className={styles.product__imageContainer}>
@@ -62,6 +63,6 @@ export default function Product({ data }: { data: productTypes }) {
 					)}
 				</a>
 			</Link>
-		</article>
+		</motion.article>
 	);
 }
