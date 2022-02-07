@@ -5,20 +5,39 @@ import {
 	LabelImportantRounded,
 } from "@mui/icons-material";
 import { Tooltip } from "@mui/material";
-import { Header } from "components";
+import { Header, Product } from "components";
 import { colors } from "constants/index";
+import { useAppContext } from "contexts";
 import { GetStaticPropsContext } from "next";
 import React from "react";
 import styles from "./styles.module.css";
 
 export default function ProductDetail({
 	product,
+	suggestedProducts,
 }: {
-	product: { description: string; image: string; title: string; price: string };
+	product: {
+		description: string;
+		image: string;
+		title: string;
+		price: string;
+		category: string;
+	};
+	suggestedProducts: [];
 }) {
+	const appContext = useAppContext();
+
 	// Split the product description string to have an array
 	const description = product.description;
 	const splitDescription = description.split("; ");
+
+	// Filter suggestions to have only products with the same category
+	let filteredSuggestions: any[] = [];
+	suggestedProducts.forEach((suggestedProduct: any) => {
+		if (suggestedProduct.category === product.category) {
+			filteredSuggestions.push(suggestedProduct);
+		}
+	});
 
 	return (
 		<main>
@@ -75,6 +94,20 @@ export default function ProductDetail({
 					</div>
 				</div>
 			</section>
+
+			<section className={styles.productDetail__suggestionsContainer}>
+				<h2>You might also like</h2>
+				<div className={styles.product__suggestions}>
+					{filteredSuggestions?.slice(0, 3).map((suggestedProduct: any) => {
+						if (suggestedProduct.category === product.category) {
+							return (
+								<Product key={suggestedProduct.id} data={suggestedProduct} />
+							);
+						}
+						return null;
+					})}
+				</div>
+			</section>
 		</main>
 	);
 }
@@ -98,12 +131,18 @@ export async function getStaticPaths() {
 export async function getStaticProps(context: GetStaticPropsContext) {
 	const id = context.params?.id;
 
-	const res = await fetch("https://fakestoreapi.com/products/" + id);
-	const product = await res.json();
+	const productResponse = await fetch(
+		"https://fakestoreapi.com/products/" + id
+	);
+	const product = await productResponse.json();
+
+	const productsResponse = await fetch("https://fakestoreapi.com/products");
+	const products = await productsResponse.json();
 
 	return {
 		props: {
 			product,
+			suggestedProducts: products,
 		},
 	};
 }

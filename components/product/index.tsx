@@ -25,8 +25,8 @@ export default function Product({ data }: { data: productTypes }) {
 					<div className={styles.product__imageContainer}>
 						<Image
 							src={data.image}
-							width={200}
-							height={200}
+							width={230}
+							height={230}
 							objectFit="contain"
 							alt="product image"
 						/>

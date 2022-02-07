@@ -9,7 +9,7 @@
 	margin-inline: 3rem;
 	margin-block: 2rem;
 	display: grid;
-	grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+	grid-template-columns: repeat(auto-fit, minmax(270px, 1fr));
 	gap: 2rem;
 	padding-bottom: 6rem;
 }
