@@ -62,9 +62,6 @@
 	.bookmarks__emptyMessageContainer {
 		margin-left: 0;
 	}
-	.bookmarks__emptyImageContainer img {
-		/* object-fit: contain; */
-	}
 }
 
 @media (max-width: 550px) {
