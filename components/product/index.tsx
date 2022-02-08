@@ -20,7 +20,13 @@ export default function Product({ data }: { data: productTypes }) {
 	const router = useRouter();
 
 	return (
-		<motion.article layout className={styles.product__container}>
+		<motion.article
+			initial={{ opacity: 0, scale: 0.8 }}
+			animate={{ opacity: 1, scale: 1 }}
+			transition={{ type: "just" }}
+			layout
+			className={styles.product__container}
+		>
 			<Link href={"/products/" + data.id}>
 				<a className={styles.product__link}>
 					<div className={styles.product__imageContainer}>

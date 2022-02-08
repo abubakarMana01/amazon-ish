@@ -11,6 +11,7 @@ import { Tooltip } from "@mui/material";
 import { Header, Product } from "components";
 import { colors } from "constants/index";
 import { useAppContext } from "contexts";
+import { motion } from "framer-motion";
 
 export default function ProductDetail({
 	product,
@@ -47,7 +48,11 @@ export default function ProductDetail({
 		<main>
 			<Header />
 
-			<section className={styles.productDetail__container}>
+			<motion.section
+				initial={{ opacity: 0, y: -50 }}
+				animate={{ opacity: 1, y: 0 }}
+				className={styles.productDetail__container}
+			>
 				<div>
 					<div className={styles.productDetail__imageContainer}>
 						<img
@@ -97,7 +102,7 @@ export default function ProductDetail({
 						</div>
 					</div>
 				</div>
-			</section>
+			</motion.section>
 
 			{filteredSuggestions.length && (
 				<section className={styles.productDetail__suggestionsContainer}>

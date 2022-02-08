@@ -111,6 +111,7 @@
 
 .product__priceAndRatingContainer {
 	display: flex;
+	width: calc(100% - 2rem);
 	justify-content: space-between;
 	align-items: center;
 	margin-bottom: 0.5rem;
