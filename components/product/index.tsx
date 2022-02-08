@@ -23,7 +23,6 @@ export default function Product({ data }: { data: productTypes }) {
 		<motion.article
 			initial={{ opacity: 0, scale: 0.8 }}
 			animate={{ opacity: 1, scale: 1 }}
-			transition={{ type: "just" }}
 			layout
 			className={styles.product__container}
 		>
