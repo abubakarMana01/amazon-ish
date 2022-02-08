@@ -10,6 +10,7 @@ import {
 	ShoppingCartRounded,
 	WatchLaterRounded,
 	AccountCircleRounded,
+	HomeRounded,
 } from "@mui/icons-material";
 import { Badge, Tooltip } from "@mui/material";
 
@@ -34,7 +35,7 @@ export default function Sidebar() {
 							}
 						>
 							<Tooltip title="Home" placement="right" arrow>
-								<Home style={{ width: "36" }} fontSize="large" />
+								<HomeRounded style={{ width: "36" }} fontSize="large" />
 							</Tooltip>
 						</a>
 					</Link>
