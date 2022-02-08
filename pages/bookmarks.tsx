@@ -11,8 +11,8 @@ export default function Bookmarks() {
 			<Header />
 
 			<motion.section
-				initial={{ scale: 0.8 }}
-				animate={{ scale: 1 }}
+				initial={{ opacity: 0, scale: 0.95 }}
+				animate={{ opacity: 1, scale: 1 }}
 				transition={{ type: "tween" }}
 				className={styles.bookmarks__container}
 			>
