@@ -30,7 +30,7 @@ export default function Bookmarks() {
 					</div>
 
 					<div className={styles.bookmarks__emptyMessageContainer}>
-						<h2>{"It's empty here."}</h2>
+						<h2>It&apos;s empty here.</h2>
 						<p>
 							Something's catching your eye? Add your favorite items to
 							Bookmarks, and check them out anytime you wish.
