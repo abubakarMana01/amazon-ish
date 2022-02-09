@@ -4,8 +4,11 @@ import styles from "styles/Bookmarks.module.css";
 import EmptyBookmarksImage from "assets/images/empty-bookmarks.svg";
 import Image from "next/image";
 import { motion } from "framer-motion";
+import { useRouter } from "next/router";
 
 export default function Bookmarks() {
+	const router = useRouter();
+
 	return (
 		<main>
 			<Header />
@@ -36,7 +39,7 @@ export default function Bookmarks() {
 							Bookmarks, and check them out anytime you wish.
 						</p>
 
-						<Button title="Go Shopping" handleClick={() => {}} />
+						<Button title="Go Shopping" handleClick={() => router.push("/")} />
 					</div>
 				</div>
 			</motion.section>

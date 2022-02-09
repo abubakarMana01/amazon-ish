@@ -4,8 +4,11 @@ import styles from "styles/Cart.module.css";
 import EmptyCartImage from "assets/images/empty-cart.svg";
 import Image from "next/image";
 import { motion } from "framer-motion";
+import { useRouter } from "next/router";
 
 export default function Cart() {
+	const router = useRouter();
+
 	return (
 		<main>
 			<Header />
@@ -32,7 +35,10 @@ export default function Cart() {
 							books, electronicts, videos, etc. and make it happy.
 						</p>
 
-						<Button title="Continue shopping" handleClick={() => {}} />
+						<Button
+							title="Continue shopping"
+							handleClick={() => router.push("/")}
+						/>
 					</div>
 				</div>
 			</motion.section>
