@@ -64,7 +64,7 @@
 	border-radius: 50%;
 	box-shadow: rgba(26, 26, 44, 0.05) 0px 0.25rem 0.5rem;
 	font-size: 0.85em;
-	margin-right: 1rem;
+	margin-right: auto;
 	font-family: var(--font-sans);
 }
 
@@ -97,5 +97,8 @@
 @media (max-width: 800px) {
 	.header__dropdownContainer {
 		display: none;
+	}
+	.btn__back {
+		margin-right: 1rem;
 	}
 }
