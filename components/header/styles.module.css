@@ -64,7 +64,7 @@
 	border-radius: 50%;
 	box-shadow: rgba(26, 26, 44, 0.05) 0px 0.25rem 0.5rem;
 	font-size: 0.85em;
-	margin-right: auto;
+	margin-right: 1rem;
 	font-family: var(--font-sans);
 }
 

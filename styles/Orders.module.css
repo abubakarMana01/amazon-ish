@@ -1,0 +1,15 @@
+.orders__container {
+	margin: 3rem;
+	margin-top: 4rem;
+	margin-bottom: 4rem;
+	min-height: calc(100vh - 216px);
+}
+
+.orders__container h1 {
+	font-size: 1.5rem;
+	margin-bottom: 3rem;
+}
+
+.orders__container p {
+	margin-bottom: 1rem;
+}
