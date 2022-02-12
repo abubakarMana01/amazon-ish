@@ -1,0 +1,70 @@
+.orderSummary__container {
+	background-color: var(--color-white);
+	box-shadow: 0 0.25rem 0.5rem rgb(26 26 44 / 5%);
+	border-radius: 0.5rem;
+	padding: 2rem;
+}
+
+.orderSummary__container h2 {
+	margin-bottom: 0.5rem;
+	font-weight: 700;
+	font-size: 1.25rem;
+}
+
+.orderSummary__orderId {
+	margin-bottom: 0.5rem;
+}
+
+.orderSummary__itemsContainer {
+	height: 120px;
+	margin-block: 1rem;
+	overflow-x: scroll;
+	display: flex;
+	gap: 1rem;
+}
+
+.orderSummary__imageContainer {
+	flex: 0.9;
+	width: 100%;
+	position: relative;
+}
+
+.orderSummary__itemsContainer::-webkit-scrollbar {
+	display: none;
+}
+
+.orderSummary__itemsContainer > div {
+	height: 100%;
+	width: 120px;
+	padding: 1rem;
+	border-radius: 0.5rem;
+	box-shadow: inset 0 0 0 1px rgb(0 0 0 / 5%);
+	background: rgba(0, 0, 0, 0.01);
+
+	display: flex;
+	flex-direction: column;
+}
+
+.orderSummary__itemsContainer > div p {
+	margin-top: auto;
+	white-space: nowrap;
+	text-overflow: ellipsis;
+	overflow: hidden;
+}
+
+.orderSummary__amountContainer {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+}
+
+.orderSummary__amountContainer h3 {
+	font-size: 1.25em;
+	font-weight: 900;
+}
+
+@media (max-width: 550px) {
+	.orderSummary__container {
+		padding: 1.5rem;
+	}
+}

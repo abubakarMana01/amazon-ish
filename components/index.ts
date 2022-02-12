@@ -6,3 +6,4 @@ export { default as Disclaimer } from "./disclaimer";
 export { default as Footer } from "./footer";
 export { default as Dropdown } from "./dropdown";
 export { default as Button } from "./button";
+export { default as Order } from "./order";
