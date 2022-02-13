@@ -4,7 +4,7 @@ import styles from "./styles.module.css";
 import Product from "assets/product.jpg";
 import Product1 from "assets/product1.jpg";
 
-export default function index() {
+export default function Order() {
 	return (
 		<article className={styles.orderSummary__container}>
 			<h2 className={styles.orderSummary__orderId}>Order ID: 1644486597</h2>

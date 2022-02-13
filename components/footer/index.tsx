@@ -26,46 +26,55 @@ export default function Footer() {
 				<ul className={styles.footer__contentLinks}>
 					<li>Make Money with Us</li>
 					<li>
-						<a href="#">About Amazon</a>
+						<a href="#">Sell products on Amazon</a>
 					</li>
 					<li>
-						<a href="#">Connect with Us</a>
+						<a href="#">Sell apps on Amazon</a>
 					</li>
 					<li>
-						<a href="#">Amazon Cares</a>
+						<a href="#">Advertise Your Products</a>
 					</li>
 					<li>
-						<a href="#">Gift a Smile</a>
+						<a href="#">Self-Publish with Us</a>
+					</li>
+					<li>
+						<a href="#">Host an Amazon Hub</a>
+					</li>
+					<li>
+						<a href="#">› See More</a>
 					</li>
 				</ul>
 				<ul className={styles.footer__contentLinks}>
 					<li>Amazon Payment</li>
 					<li>
-						<a href="#">About Amazon</a>
+						<a href="#">Amazon Business Card</a>
 					</li>
 					<li>
-						<a href="#">Connect with Us</a>
+						<a href="#">Shop with Points</a>
 					</li>
 					<li>
-						<a href="#">Amazon Cares</a>
+						<a href="#">Reload Your Balance</a>
 					</li>
 					<li>
-						<a href="#">Gift a Smile</a>
+						<a href="#">Amazon Currency Converter</a>
 					</li>
 				</ul>
 				<ul className={styles.footer__contentLinks}>
 					<li>Let Us Help You</li>
 					<li>
-						<a href="#">About Amazon</a>
+						<a href="#">Amazon and COVID-19</a>
 					</li>
 					<li>
-						<a href="#">Connect with Us</a>
+						<a href="#">Shipping Rates & Policies</a>
 					</li>
 					<li>
-						<a href="#">Amazon Cares</a>
+						<a href="#">Returns & Replacements</a>
 					</li>
 					<li>
-						<a href="#">Gift a Smile</a>
+						<a href="#">Manage Your Devices</a>
+					</li>
+					<li>
+						<a href="#">Amazon Assistant</a>
 					</li>
 				</ul>
 			</div>
