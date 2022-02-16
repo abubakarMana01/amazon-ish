@@ -12,6 +12,9 @@ export default function Order() {
 
 			<div className={styles.orderSummary__itemsContainer}>
 				<div>
+					<div className={styles.orderSummary__quantity}>
+						<span>x2</span>
+					</div>
 					<div className={styles.orderSummary__imageContainer}>
 						<Image
 							src={Product1}
@@ -24,6 +27,9 @@ export default function Order() {
 				</div>
 
 				<div>
+					<div className={styles.orderSummary__quantity}>
+						<span>x1</span>
+					</div>
 					<div className={styles.orderSummary__imageContainer}>
 						<Image
 							src={Product}

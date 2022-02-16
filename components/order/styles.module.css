@@ -23,6 +23,24 @@
 	gap: 1rem;
 }
 
+.orderSummary__itemsContainer > div {
+	position: relative;
+}
+
+.orderSummary__quantity {
+	position: absolute;
+	width: fit-content;
+	z-index: 1;
+	left: auto;
+	right: 0.5rem;
+	top: 0.5rem;
+	padding: 0.25rem 0.5rem;
+	border-radius: 1rem;
+	font-size: 0.6rem;
+	background: var(--color-mediumGrey);
+	font-weight: 700;
+}
+
 .orderSummary__imageContainer {
 	flex: 0.9;
 	width: 100%;
