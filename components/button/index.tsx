@@ -1,15 +1,15 @@
 import React from "react";
 import styles from "./styles.module.css";
 
-export default function Button({
-	title,
-	handleClick,
-}: {
+interface IProps {
 	title: string;
 	handleClick: () => void;
-}) {
+	large?: boolean;
+}
+
+export default function Button({ title, handleClick, large = false }: IProps) {
 	return (
-		<button onClick={handleClick} className={styles.button}>
+		<button onClick={handleClick} className={`${styles.button} ${large && styles.largeButton}`}>
 			{title}
 		</button>
 	);

@@ -11,7 +11,12 @@ import slide5 from "assets/carousel/5.jpg";
 import slide6 from "assets/carousel/6.jpg";
 import { useAppContext } from "contexts";
 
-const Home = ({ products }: { products: [] }) => {
+interface IProps {
+	products: [];
+	error: any;
+}
+
+const Home = ({ products, error }: IProps) => {
 	const carouselImages = [slide1, slide2, slide3, slide4, slide5, slide6];
 	products = products.sort(() => Math.random() - 0.5);
 
@@ -41,15 +46,21 @@ const Home = ({ products }: { products: [] }) => {
 			<Categories />
 
 			<section className={styles.products__container}>
-				{products.map((product: any) => {
-					if (appContext.currentCategory === "all categories") {
-						return <Product key={product.id} data={product} />;
-					} else if (product.category === appContext.currentCategory) {
-						return <Product key={product.id} data={product} />;
-					} else {
-						return null;
-					}
-				})}
+				{!products.length && error ? (
+					<div>An error occured</div>
+				) : (
+					<>
+						{products.map((product: any) => {
+							if (appContext.currentCategory === "all categories") {
+								return <Product key={product.id} data={product} />;
+							} else if (product.category === appContext.currentCategory) {
+								return <Product key={product.id} data={product} />;
+							} else {
+								return null;
+							}
+						})}
+					</>
+				)}
 			</section>
 		</main>
 	);
@@ -58,12 +69,20 @@ const Home = ({ products }: { products: [] }) => {
 export default Home;
 
 export async function getStaticProps() {
-	const res = await fetch("https://fakestoreapi.com/products");
-	const products = await res.json();
+	let products = [];
+	let error = null;
+	try {
+		const res = await fetch("https://fakestoreapi.com/products");
+		products = await res.json();
+	} catch (err: any) {
+		console.log(err.message);
+		error = JSON.stringify(err);
+	}
 
 	return {
 		props: {
 			products,
+			error,
 		},
 	};
 }

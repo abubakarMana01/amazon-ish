@@ -17,3 +17,13 @@
 .button:hover {
 	transform: scale(1.05);
 }
+
+.largeButton {
+	width: 100%;
+	padding: 1rem 0.75rem;
+	text-transform: uppercase;
+}
+
+.largeButton:hover {
+	transform: scale(1);
+}
