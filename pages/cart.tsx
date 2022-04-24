@@ -6,6 +6,7 @@ import Image from "next/image";
 import { motion } from "framer-motion";
 import { useRouter } from "next/router";
 import { DoneAll } from "@mui/icons-material";
+import { useAppContext } from "contexts";
 
 interface IProps {
 	products: [];
@@ -14,6 +15,9 @@ interface IProps {
 
 export default function Cart({ products, error }: IProps) {
 	const router = useRouter();
+
+	const appContext = useAppContext();
+	appContext.setCartItemsCount(products.length);
 
 	return (
 		<main>
@@ -73,7 +77,7 @@ export default function Cart({ products, error }: IProps) {
 								</div>
 
 								<h3 className={styles.cart__total}>Sub-Total: $95.98</h3>
-								<p>Number of items: 2</p>
+								<p>Number of items: {products.length}</p>
 								<p style={{ opacity: 0.5, marginBottom: "1rem" }}>
 									This price is exclusive of taxes. GST will be added during
 									checkout.
@@ -95,7 +99,7 @@ export async function getStaticProps() {
 	try {
 		const res = await fetch("https://fakestoreapi.com/products");
 		products = await res.json();
-		products.length = 2;
+		products.length = 3;
 	} catch (err: any) {
 		console.log(err.message);
 		error = JSON.stringify(err);

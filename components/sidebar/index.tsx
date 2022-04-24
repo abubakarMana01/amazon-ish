@@ -12,9 +12,11 @@ import {
 	HomeRounded,
 } from "@mui/icons-material";
 import { Badge, Tooltip } from "@mui/material";
+import { useAppContext } from "contexts";
 
 export default function Sidebar() {
 	const router = useRouter();
+	const appContext = useAppContext();
 
 	return (
 		<nav className={styles.nav}>
@@ -50,7 +52,11 @@ export default function Sidebar() {
 							}
 						>
 							<Tooltip title="Cart" placement="right" arrow>
-								<Badge badgeContent={0} color="warning" showZero>
+								<Badge
+									badgeContent={appContext.cartItemsCount}
+									color="warning"
+									showZero
+								>
 									<ShoppingCartRounded fontSize="large" />
 								</Badge>
 							</Tooltip>
@@ -67,7 +73,11 @@ export default function Sidebar() {
 							}
 						>
 							<Tooltip title="Bookmarks" placement="right" arrow>
-								<Badge badgeContent={0} color="warning" showZero>
+								<Badge
+									badgeContent={appContext.bookmarkItemsCount}
+									color="warning"
+									showZero
+								>
 									<BookmarkRounded fontSize="large" />
 								</Badge>
 							</Tooltip>

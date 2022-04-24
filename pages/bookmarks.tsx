@@ -5,6 +5,7 @@ import EmptyBookmarksImage from "assets/images/empty-bookmarks.svg";
 import Image from "next/image";
 import { motion } from "framer-motion";
 import { useRouter } from "next/router";
+import { useAppContext } from "contexts";
 
 interface IProps {
 	bookmarkedProducts: [];
@@ -13,6 +14,9 @@ interface IProps {
 
 export default function Bookmarks({ bookmarkedProducts, error }: IProps) {
 	const router = useRouter();
+
+	const appContext = useAppContext();
+	appContext.setBookmarkItemsCount(bookmarkedProducts.length);
 
 	return (
 		<main>
