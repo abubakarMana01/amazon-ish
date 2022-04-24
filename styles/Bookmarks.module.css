@@ -50,6 +50,14 @@
 	margin-bottom: 3rem;
 }
 
+.bookmarks__productsContainer {
+	margin-block: 2rem;
+	display: grid;
+	grid-template-columns: repeat(auto-fit, minmax(270px, 300px));
+	gap: 2rem;
+	padding-bottom: 6rem;
+}
+
 @media (max-width: 728px) {
 	.bookmarks__emptyContainer {
 		flex-direction: column;
@@ -62,11 +70,19 @@
 	.bookmarks__emptyMessageContainer {
 		margin-left: 0;
 	}
+	.bookmarks__productsContainer {
+		margin-top: 1rem;
+		grid-template-columns: repeat(auto-fit, minmax(270px, 1fr));
+	}
 }
 
 @media (max-width: 550px) {
 	.bookmarks__container {
 		margin-inline: 1.5rem;
 		margin-top: 1rem;
+	}
+	.bookmarks__productsContainer {
+		margin-top: 1rem;
+		grid-template-columns: repeat(auto-fit, minmax(270px, 1fr));
 	}
 }
