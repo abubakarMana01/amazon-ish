@@ -74,7 +74,7 @@ export default function CartItem({ data }: IProps) {
 					</div>
 					<Tooltip title="Remove from cart" placement="right" arrow color="red">
 						<div className={styles.product__removeItem}>
-							<RemoveShoppingCart fontSize="12px" color="inherit" />
+							<RemoveShoppingCart color="inherit" />
 						</div>
 					</Tooltip>
 				</div>
