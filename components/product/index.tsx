@@ -1,24 +1,25 @@
 import { Star } from "@mui/icons-material";
 import Image from "next/image";
-import { useRouter } from "next/router";
 import React from "react";
 import styles from "./styles.module.css";
 import TextTruncate from "react-text-truncate";
 import Link from "next/link";
 import { motion } from "framer-motion";
 
-interface productTypes {
+type productTypes = {
 	id: string;
 	image: string;
 	price: string;
 	title: string;
 	rating: { rate: number };
 	category: string;
+};
+
+interface IProps {
+	data: productTypes;
 }
 
-export default function Product({ data }: { data: productTypes }) {
-	const router = useRouter();
-
+export default function Product({ data }: IProps) {
 	return (
 		<motion.article
 			initial={{ opacity: 0, scale: 0.9 }}

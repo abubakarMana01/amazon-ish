@@ -5,7 +5,6 @@ import Link from "next/link";
 import styles from "./styles.module.css";
 import Logo from "assets/amazon-logo-sm.svg";
 import {
-	Home,
 	BookmarkRounded,
 	ShoppingCartRounded,
 	WatchLaterRounded,
