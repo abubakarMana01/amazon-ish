@@ -24,9 +24,9 @@ export default function Cart({ products, error }: IProps) {
 			<Header />
 
 			<motion.section
-				initial={{ opacity: 0, scale: 0.95 }}
-				animate={{ opacity: 1, scale: 1 }}
-				transition={{ type: "tween" }}
+				initial={{ opacity: 0, y: -50 }}
+				animate={{ opacity: 1, y: 0 }}
+				transition={{ type: "spring" }}
 				className={styles.cart__container}
 			>
 				<h1>Your Cart</h1>
