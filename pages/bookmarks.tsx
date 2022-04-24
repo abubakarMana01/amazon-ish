@@ -25,7 +25,7 @@ export default function Bookmarks({ bookmarkedProducts, error }: IProps) {
 			<motion.section
 				initial={{ opacity: 0, y: -50 }}
 				animate={{ opacity: 1, y: 0 }}
-				transition={{ type: "spring" }}
+				// transition={{ type: "spring" }}
 				className={styles.bookmarks__container}
 			>
 				<h1>Bookmarks</h1>

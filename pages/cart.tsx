@@ -26,7 +26,7 @@ export default function Cart({ products, error }: IProps) {
 			<motion.section
 				initial={{ opacity: 0, y: -50 }}
 				animate={{ opacity: 1, y: 0 }}
-				transition={{ type: "spring" }}
+				// transition={{ type: "spring" }}
 				className={styles.cart__container}
 			>
 				<h1>Your Cart</h1>

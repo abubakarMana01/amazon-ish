@@ -15,7 +15,7 @@ export default function Orders() {
 			<motion.section
 				initial={{ opacity: 0, y: -50 }}
 				animate={{ opacity: 1, y: 0 }}
-				transition={{ type: "spring" }}
+				// transition={{ type: "spring" }}
 				className={styles.orders__container}
 			>
 				<h1>Your Orders</h1>
