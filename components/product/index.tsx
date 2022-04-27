@@ -45,13 +45,14 @@ export default function Product({ data }: IProps) {
               <span>{data.category}</span>
             </div>
 
-            <TextTruncate
+            {/* <TextTruncate
               line={3}
               element="h2"
               containerClassName={styles.product__title}
               truncateText="..."
               text={data.title}
-            />
+            /> */}
+            <h2 className={styles.product__title}>{data.title}</h2>
 
             <div className={styles.product__priceAndRatingContainer}>
               <h3>{`$${data.price}`}</h3>

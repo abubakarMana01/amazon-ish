@@ -53,14 +53,16 @@ export default function CartItem({ data }: IProps) {
 
       <div className={styles.product__details}>
         <Link href={"/products/" + data.id}>
-          <a>
-            <TextTruncate
+          <a className={styles.product__name}>
+            {/* <TextTruncate
               line={2}
               element="p"
               containerClassName={styles.product__name}
               truncateText=""
               text={data.title}
-            />
+            /> */}
+
+            {data.title}
           </a>
         </Link>
 
