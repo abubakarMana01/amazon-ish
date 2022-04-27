@@ -6,7 +6,7 @@ import { AppProvider } from "contexts";
 import ProgressBar from "@badrap/bar-of-progress";
 import Router from "next/router";
 
-function MyApp({ Component, pageProps }: AppProps) {
+function MyApp({ Component, pageProps }: any) {
   const progress = new ProgressBar({
     size: 4,
     color: "#f99900",
