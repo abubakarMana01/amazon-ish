@@ -1,49 +1,51 @@
 * {
-	box-sizing: border-box;
-	margin: 0;
-	padding: 0;
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
 }
 
 html,
 body {
-	padding: 0;
-	margin: 0;
-	font-family: var(--font-sans);
-	font-size: 1rem;
-	background-color: var(--color-grey);
-	color: var(--color-dark);
+  padding: 0;
+  margin: 0;
+  font-family: var(--font-sans);
+  font-size: 1rem;
+  background-color: var(--color-grey);
+  color: var(--color-dark);
 }
 
 body::-webkit-scrollbar {
-	width: 12px;
+  width: 12px;
 }
 
 body::-webkit-scrollbar-thumb {
-	background-color: rgb(197, 197, 197);
-	border: 2px solid var(--color-mediumGrey);
-	border-radius: 5px;
+  background-color: rgb(197, 197, 197);
+  border: 2px solid var(--color-mediumGrey);
+  border-radius: 5px;
 }
 body::-webkit-scrollbar-track {
-	background: var(--color-mediumGrey);
+  background: var(--color-mediumGrey);
 }
 
 :root {
-	--color-white: #fff;
-	--color-primary: #f99900;
-	--color-grey: #fafafa;
-	--color-dark: #1a1a2c;
-	--color-mediumGrey: #eaeaea;
-	--color-darkGrey: #616161;
+  --color-white: #fff;
+  --color-primary: #f99900;
+  --color-grey: #fafafa;
+  --color-dark: #1a1a2c;
+  --color-mediumGrey: #eaeaea;
+  --color-darkGrey: #616161;
 
-	--font-sans: "Nunito Sans", sans-serif;
+  --font-sans: "Nunito Sans", sans-serif;
 }
 
 main {
-	padding-left: clamp(80px, 10vw, 100px);
+  padding-left: clamp(80px, 10vw, 100px);
+  max-width: 1440px;
+  margin-inline: auto;
 }
 
 @media (max-width: 550px) {
-	main {
-		padding-left: 0;
-	}
+  main {
+    padding-left: 0;
+  }
 }

@@ -9,7 +9,7 @@ import Router from "next/router";
 function MyApp({ Component, pageProps }: AppProps) {
   const progress = new ProgressBar({
     size: 4,
-    color: "#fe595e",
+    color: "#f99900",
     delay: 100,
   });
 
