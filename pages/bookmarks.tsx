@@ -8,81 +8,81 @@ import { useRouter } from "next/router";
 import { useAppContext } from "contexts";
 
 interface IProps {
-	bookmarkedProducts: [];
-	error: any;
+  bookmarkedProducts: [];
+  error: any;
 }
 
 export default function Bookmarks({ bookmarkedProducts, error }: IProps) {
-	const router = useRouter();
+  const router = useRouter();
 
-	const appContext = useAppContext();
-	appContext.setBookmarkItemsCount(bookmarkedProducts.length);
+  const appContext = useAppContext();
+  appContext.setBookmarkItemsCount(bookmarkedProducts.length);
 
-	return (
-		<main>
-			<Header />
+  return (
+    <main>
+      <Header />
 
-			<motion.section
-				initial={{ opacity: 0, y: -50 }}
-				animate={{ opacity: 1, y: 0 }}
-				// transition={{ type: "spring" }}
-				className={styles.bookmarks__container}
-			>
-				<h1>Bookmarks</h1>
+      <motion.section
+        initial={{ opacity: 0, y: -50 }}
+        animate={{ opacity: 1, y: 0 }}
+        // transition={{ type: "spring" }}
+        className={styles.bookmarks__container}
+      >
+        <h1>Bookmarks</h1>
 
-				{!bookmarkedProducts.length && !error ? (
-					<div className={styles.bookmarks__emptyContainer}>
-						<div className={styles.bookmarks__emptyImageWrapper}>
-							<div className={styles.bookmarks__emptyImageContainer}>
-								<Image
-									layout="fill"
-									src={EmptyBookmarksImage}
-									alt="empty-bookmarks"
-								/>
-							</div>
-						</div>
+        {!bookmarkedProducts.length && !error ? (
+          <div className={styles.bookmarks__emptyContainer}>
+            <div className={styles.bookmarks__emptyImageWrapper}>
+              <div className={styles.bookmarks__emptyImageContainer}>
+                <Image
+                  layout="fill"
+                  src={EmptyBookmarksImage}
+                  alt="empty-bookmarks"
+                />
+              </div>
+            </div>
 
-						<div className={styles.bookmarks__emptyMessageContainer}>
-							<h2>It&apos;s empty here.</h2>
-							<p>
-								Something&apos;s catching your eye? Add your favorite items to
-								Bookmarks, and check them out anytime you wish.
-							</p>
+            <div className={styles.bookmarks__emptyMessageContainer}>
+              <h2>It&apos;s empty here.</h2>
+              <p>
+                Something&apos;s catching your eye? Add your favorite items to
+                Bookmarks, and check them out anytime you wish.
+              </p>
 
-							<Button
-								title="Go Shopping"
-								handleClick={() => router.push("/")}
-							/>
-						</div>
-					</div>
-				) : (
-					<div className={styles.bookmarks__productsContainer}>
-						{bookmarkedProducts.map((product: any) => (
-							<Product key={product.id} data={product} />
-						))}
-					</div>
-				)}
-			</motion.section>
-		</main>
-	);
+              <Button
+                title="Go Shopping"
+                handleClick={() => router.push("/")}
+              />
+            </div>
+          </div>
+        ) : (
+          <div className={styles.bookmarks__productsContainer}>
+            {bookmarkedProducts.map((product: any) => (
+              <Product key={product.id} data={product} />
+            ))}
+          </div>
+        )}
+      </motion.section>
+    </main>
+  );
 }
 
 export async function getStaticProps() {
-	let bookmarkedProducts = [];
-	let error = null;
-	try {
-		const res = await fetch("https://fakestoreapi.com/products");
-		bookmarkedProducts = await res.json();
-		bookmarkedProducts.length = 2;
-	} catch (err: any) {
-		console.log(err.message);
-		error = JSON.stringify(err);
-	}
+  let bookmarkedProducts = [];
+  let error = null;
+  try {
+    const res = await fetch("https://fakestoreapi.com/products");
+    bookmarkedProducts = await res.json();
+    bookmarkedProducts.length = 2;
+  } catch (err: any) {
+    console.log(err.message);
+    error = JSON.stringify(err);
+  }
 
-	return {
-		props: {
-			bookmarkedProducts,
-			error,
-		},
-	};
+  return {
+    props: {
+      bookmarkedProducts,
+      error,
+    },
+  };
 }
