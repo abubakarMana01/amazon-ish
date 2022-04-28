@@ -14,6 +14,8 @@ import {
 import { Badge, Tooltip } from "@mui/material";
 import { useAppContext } from "contexts";
 
+type routeTypes = "orders" | "cart" | "bookmarks" | "account" | "";
+
 export default function Sidebar() {
 	const router = useRouter();
 	const appContext = useAppContext();
@@ -28,6 +30,14 @@ export default function Sidebar() {
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [appContext.deviceWidth]);
 
+	const handleRoutePush = (route: routeTypes) => {
+		router.push(`/${route}`);
+
+		if (appContext.deviceWidth <= 550) {
+			appContext.setIsSidebarOpened(false);
+		}
+	};
+
 	return (
 		<nav
 			style={{
@@ -41,95 +51,86 @@ export default function Sidebar() {
 
 			<ul className={styles.navLinks}>
 				<li>
-					<Link href="/">
-						<a
-							data-tip="hello world"
-							className={
-								router.pathname === "/"
-									? styles.navLink__active
-									: styles.navLink
-							}
-						>
-							<Tooltip title="Home" placement="right" arrow>
-								<HomeRounded style={{ width: 36 }} fontSize="large" />
-							</Tooltip>
-						</a>
-					</Link>
-				</li>
-				<li>
-					<Link href="/cart">
-						<a
-							data-tip="hello world"
-							className={
-								router.pathname === "/cart"
-									? styles.navLink__active
-									: styles.navLink
-							}
-						>
-							<Tooltip title="Cart" placement="right" arrow>
-								<Badge
-									badgeContent={appContext.cartItemsCount}
-									color="warning"
-									showZero
-								>
-									<ShoppingCartRounded fontSize="large" />
-								</Badge>
-							</Tooltip>
-						</a>
-					</Link>
-				</li>
-				<li>
-					<Link href="/bookmarks">
-						<a
-							className={
-								router.pathname === "/bookmarks"
-									? styles.navLink__active
-									: styles.navLink
-							}
-						>
-							<Tooltip title="Bookmarks" placement="right" arrow>
-								<Badge
-									badgeContent={appContext.bookmarkItemsCount}
-									color="warning"
-									showZero
-								>
-									<BookmarkRounded fontSize="large" />
-								</Badge>
-							</Tooltip>
-						</a>
-					</Link>
-				</li>
-				<li>
-					<Link href="/orders">
-						<a
-							className={
-								router.pathname === "/orders"
-									? styles.navLink__active
-									: styles.navLink
-							}
-						>
-							<Tooltip title="Orders" placement="right" arrow>
-								<WatchLaterRounded fontSize="large" />
-							</Tooltip>
-						</a>
-					</Link>
-				</li>
-			</ul>
-
-			<div className={styles.profileIconContainer}>
-				<Link href="/account">
-					<a
+					<span
+						onClick={() => handleRoutePush("")}
 						className={
-							router.pathname === "/account"
+							router.pathname === "/" ? styles.navLink__active : styles.navLink
+						}
+					>
+						<Tooltip title="Home" placement="right" arrow>
+							<HomeRounded style={{ width: 36 }} fontSize="large" />
+						</Tooltip>
+					</span>
+				</li>
+				<li>
+					<span
+						onClick={() => handleRoutePush("cart")}
+						className={
+							router.pathname === "/cart"
 								? styles.navLink__active
 								: styles.navLink
 						}
 					>
-						<Tooltip title="Account" placement="right" arrow>
-							<AccountCircleRounded fontSize="large" />
+						<Tooltip title="Cart" placement="right" arrow>
+							<Badge
+								badgeContent={appContext.cartItemsCount}
+								color="warning"
+								showZero
+							>
+								<ShoppingCartRounded fontSize="large" />
+							</Badge>
 						</Tooltip>
-					</a>
-				</Link>
+					</span>
+				</li>
+				<li>
+					<span
+						onClick={() => handleRoutePush("bookmarks")}
+						className={
+							router.pathname === "/bookmarks"
+								? styles.navLink__active
+								: styles.navLink
+						}
+					>
+						<Tooltip title="Bookmarks" placement="right" arrow>
+							<Badge
+								badgeContent={appContext.bookmarkItemsCount}
+								color="warning"
+								showZero
+							>
+								<BookmarkRounded fontSize="large" />
+							</Badge>
+						</Tooltip>
+					</span>
+				</li>
+				<li>
+					<span
+						onClick={() => handleRoutePush("orders")}
+						className={
+							router.pathname === "/orders"
+								? styles.navLink__active
+								: styles.navLink
+						}
+					>
+						<Tooltip title="Orders" placement="right" arrow>
+							<WatchLaterRounded fontSize="large" />
+						</Tooltip>
+					</span>
+				</li>
+			</ul>
+
+			<div className={styles.profileIconContainer}>
+				<span
+					onClick={() => handleRoutePush("account")}
+					className={
+						router.pathname === "/account"
+							? styles.navLink__active
+							: styles.navLink
+					}
+				>
+					<Tooltip title="Account" placement="right" arrow>
+						<AccountCircleRounded fontSize="large" />
+					</Tooltip>
+				</span>
 			</div>
 		</nav>
 	);

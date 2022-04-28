@@ -27,13 +27,13 @@
 	align-items: center;
 }
 
+.navLinks {
+	width: 36px;
+}
+
 .navLinks li {
 	margin-inline: auto;
 	margin-bottom: 1.75rem;
-}
-
-.navLinks {
-	width: 36px;
 }
 
 .navLinks svg {
@@ -43,6 +43,11 @@
 
 .navLink {
 	color: var(--color-dark);
+}
+
+.navLink,
+.navLink__active {
+	cursor: pointer;
 }
 
 .navLink__active svg {
