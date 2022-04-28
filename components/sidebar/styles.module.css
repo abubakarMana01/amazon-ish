@@ -58,12 +58,7 @@
 	transform: scale(1.15);
 }
 
-.profileIconContainer {
-	margin-bottom: 1rem;
-}
-
 .profileIconContainer svg {
-	width: 33px;
 	transition: transform 0.15s ease;
 }
 

@@ -36,7 +36,7 @@ export default function Sidebar() {
 							}
 						>
 							<Tooltip title="Home" placement="right" arrow>
-								<HomeRounded style={{ width: "36" }} fontSize="large" />
+								<HomeRounded style={{ width: 36 }} fontSize="large" />
 							</Tooltip>
 						</a>
 					</Link>
