@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useRouter } from "next/router";
 import Image from "next/image";
 import Link from "next/link";
@@ -18,10 +18,25 @@ export default function Sidebar() {
 	const router = useRouter();
 	const appContext = useAppContext();
 
+	useEffect(() => {
+		if (appContext.deviceWidth > 550) {
+			appContext.setIsSidebarOpened(true);
+		} else {
+			appContext.setIsSidebarOpened(false);
+		}
+
+		// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, [appContext.deviceWidth]);
+
 	return (
-		<nav className={styles.nav}>
+		<nav
+			style={{
+				transform: `translateX(${appContext.isSidebarOpened ? 0 : -100}%)`,
+			}}
+			className={styles.nav}
+		>
 			<div className={styles.logoContainer}>
-				<Image src={Logo} alt="logo" />
+				{/* <Image src={Logo} alt="logo" /> */}
 			</div>
 
 			<ul className={styles.navLinks}>

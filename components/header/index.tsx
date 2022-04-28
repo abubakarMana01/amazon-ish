@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Image from "next/image";
 import styles from "./styles.module.css";
 import { ArrowBack, Search } from "@mui/icons-material";
@@ -7,10 +7,26 @@ import LogoSm from "assets/amazon-logo-sm.svg";
 import { useRouter } from "next/router";
 import { IconButton } from "@mui/material";
 import { Dropdown } from "components";
-import Link from "next/link";
+import { useAppContext } from "contexts";
 
 export default function Header() {
 	const router = useRouter();
+	const { setIsSidebarOpened, isSidebarOpened, setDeviceWidth } =
+		useAppContext();
+
+	useEffect(() => {
+		setDeviceWidth(window.innerWidth);
+
+		// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, []);
+
+	const handleLogoPress = () => {
+		if (window.innerWidth > 550 && isSidebarOpened) {
+			router.push("/");
+		} else {
+			setIsSidebarOpened(!isSidebarOpened);
+		}
+	};
 
 	return (
 		<header className={styles.header__container}>
@@ -22,13 +38,15 @@ export default function Header() {
 				</div>
 			)}
 
-			<div className={styles.mobile__logoContainer}>
-				<Link href="/">
-					<a>
-						<Image src={LogoSm} alt="logo" width={26} height={26} />
-					</a>
-				</Link>
+			<div className={styles.header__logoWrapper}>
+				<div
+					className={`${styles.header__logoContainer}`}
+					onClick={handleLogoPress}
+				>
+					<Image src={LogoSm} alt="logo" width={26} height={26} />
+				</div>
 			</div>
+
 			<div className={styles.input__container}>
 				<Search />
 				<input type="text" placeholder="Search..." />
