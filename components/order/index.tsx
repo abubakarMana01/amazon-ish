@@ -1,50 +1,68 @@
 import Image from "next/image";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import styles from "./styles.module.css";
-import Product from "assets/product.jpg";
-import Product1 from "assets/product1.jpg";
 
-export default function Order() {
+interface IProps {
+	data: {
+		_id: string;
+		paymentMethod: string;
+		products: {
+			product: {
+				_id: string;
+				title: string;
+				image: string;
+				price: number;
+			};
+			quantity: number;
+		}[];
+	};
+}
+
+export default function Order({ data: order }: IProps) {
+	const [totalPrice, setTotalPrice] = useState(0);
+
+	useEffect(() => {
+		order.products.forEach((_) => {
+			setTotalPrice((prev: number) => prev + _.product.price * _.quantity);
+		});
+
+		// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, []);
+
 	return (
 		<article className={styles.orderSummary__container}>
-			<h2 className={styles.orderSummary__orderId}>Order ID: 1644486597</h2>
-			<p>Payment Method: Card</p>
+			<h2 className={styles.orderSummary__orderId}>
+				Order ID: {order._id.slice(0, 11)}
+			</h2>
+			<p>
+				Payment Method:{" "}
+				<span style={{ textTransform: "capitalize" }}>
+					{order.paymentMethod}
+				</span>
+			</p>
 
 			<div className={styles.orderSummary__itemsContainer}>
-				<div>
-					<div className={styles.orderSummary__quantity}>
-						<span>x2</span>
+				{order.products.map(({ product, quantity }) => (
+					<div key={product._id}>
+						<div className={styles.orderSummary__quantity}>
+							<span>x{quantity}</span>
+						</div>
+						<div className={styles.orderSummary__imageContainer}>
+							<Image
+								src={product.image}
+								alt="product"
+								objectFit="contain"
+								layout="fill"
+							/>
+						</div>
+						<p>{product.title}</p>
 					</div>
-					<div className={styles.orderSummary__imageContainer}>
-						<Image
-							src={Product1}
-							alt="product"
-							objectFit="contain"
-							layout="fill"
-						/>
-					</div>
-					<p>DualSense Wireless Controller - Click. Charge. Play. Wireless</p>
-				</div>
-
-				<div>
-					<div className={styles.orderSummary__quantity}>
-						<span>x1</span>
-					</div>
-					<div className={styles.orderSummary__imageContainer}>
-						<Image
-							src={Product}
-							alt="product"
-							objectFit="contain"
-							layout="fill"
-						/>
-					</div>
-					<p>Samsung Galaxy S20 5G Factory Unlocked New Android Cell…</p>
-				</div>
+				))}
 			</div>
 
 			<div className={styles.orderSummary__amountContainer}>
 				<p>Amount</p>
-				<h3>$223.53</h3>
+				{totalPrice && <h3>{`$${totalPrice}`}</h3>}
 			</div>
 		</article>
 	);

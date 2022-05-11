@@ -1,11 +1,8 @@
 import React, { useEffect } from "react";
 import { useRouter } from "next/router";
-import Image from "next/image";
-import Link from "next/link";
 import styles from "./styles.module.css";
-import Logo from "assets/amazon-logo-sm.svg";
 import {
-	BookmarkRounded,
+	BookmarksRounded,
 	ShoppingCartRounded,
 	WatchLaterRounded,
 	AccountCircleRounded,
@@ -14,7 +11,13 @@ import {
 import { Badge, Tooltip } from "@mui/material";
 import { useAppContext } from "contexts";
 
-type routeTypes = "orders" | "cart" | "bookmarks" | "account" | "";
+type routeTypes =
+	| "orders"
+	| "cart"
+	| "bookmarks"
+	| "account"
+	| ""
+	| "account/login";
 
 export default function Sidebar() {
 	const router = useRouter();
@@ -29,6 +32,14 @@ export default function Sidebar() {
 
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [appContext.deviceWidth]);
+
+	useEffect(() => {
+		if (!appContext.user) {
+			appContext.setCartItemsCount(0);
+			appContext.setBookmarkItemsCount(0);
+		}
+		// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, [appContext.user]);
 
 	const handleRoutePush = (route: routeTypes) => {
 		router.push(`/${route}`);
@@ -75,7 +86,7 @@ export default function Sidebar() {
 							<Badge
 								badgeContent={appContext.cartItemsCount}
 								color="warning"
-								showZero
+								showZero={false}
 							>
 								<ShoppingCartRounded fontSize="large" />
 							</Badge>
@@ -95,9 +106,9 @@ export default function Sidebar() {
 							<Badge
 								badgeContent={appContext.bookmarkItemsCount}
 								color="warning"
-								showZero
+								showZero={false}
 							>
-								<BookmarkRounded fontSize="large" />
+								<BookmarksRounded fontSize="large" />
 							</Badge>
 						</Tooltip>
 					</span>
@@ -120,9 +131,13 @@ export default function Sidebar() {
 
 			<div className={styles.profileIconContainer}>
 				<span
-					onClick={() => handleRoutePush("account")}
+					onClick={() =>
+						handleRoutePush(appContext.user ? "account" : "account/login")
+					}
 					className={
-						router.pathname === "/account"
+						router.pathname === "/account" ||
+						router.pathname === "/account/login" ||
+						router.pathname === "/account/signup"
 							? styles.navLink__active
 							: styles.navLink
 					}

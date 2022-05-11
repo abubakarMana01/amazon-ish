@@ -113,6 +113,15 @@
 	padding: 0.5rem 1.5rem;
 }
 
+.productDetail__cartButtonLoading {
+	pointer-events: none;
+	opacity: 0.5;
+}
+
+.productDetail__cartButtonAdded {
+	background-color: #dc143c;
+}
+
 .productDetail__buttons .productDetail__cartButton:hover {
 	transform: scale(1.05);
 }

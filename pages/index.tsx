@@ -10,6 +10,7 @@ import slide4 from "assets/carousel/4.jpg";
 import slide5 from "assets/carousel/5.jpg";
 import slide6 from "assets/carousel/6.jpg";
 import { useAppContext } from "contexts";
+import { axios } from "config";
 
 interface IProps {
 	products: [];
@@ -18,7 +19,7 @@ interface IProps {
 
 const Home = ({ products, error }: IProps) => {
 	const carouselImages = [slide1, slide2, slide3, slide4, slide5, slide6];
-	products = products.sort(() => Math.random() - 0.5);
+	// products = products.sort(() => Math.random() - 0.5);
 
 	const appContext: any = useAppContext();
 
@@ -72,8 +73,8 @@ export async function getStaticProps() {
 	let products = [];
 	let error = null;
 	try {
-		const res = await fetch("https://fakestoreapi.com/products");
-		products = await res.json();
+		const res = await axios.get("/products");
+		products = await res.data;
 	} catch (err: any) {
 		console.log(err.message);
 		error = JSON.stringify(err);

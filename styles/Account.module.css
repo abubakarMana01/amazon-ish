@@ -118,3 +118,121 @@
 .form__buttonGoogle:hover {
 	box-shadow: inset 0 0 0.5rem rgba(26, 26, 44, 0.3);
 }
+
+.account__imageContainer {
+	position: relative;
+	width: 80px;
+	height: 80px;
+	border-radius: 50%;
+	overflow: hidden;
+}
+
+.account__topContainer {
+	position: relative;
+	display: flex;
+	align-items: center;
+	gap: 1rem;
+}
+
+.account__topContainer .account__signOutButton {
+	margin-left: auto;
+	border: none;
+	color: #fff;
+	padding: 0.65em 1.5em;
+	border-radius: 0.5rem;
+	font-weight: 700;
+	background-color: var(--color-red);
+	font-size: clamp(0.875rem, 3vw, 1rem);
+	cursor: pointer;
+}
+
+.account__nameContainer {
+	max-width: 480px;
+}
+
+.account__nameContainer {
+	flex: 1;
+}
+
+.account__nameContainer h1 {
+	font-size: calc(1.3rem + 0.6vw);
+}
+
+.account__nameContainer p {
+	font-size: clamp(0.875rem, 3vw, 1rem);
+	opacity: 0.5;
+}
+
+.account__info {
+	background-color: var(--color-white);
+	border-radius: 0.5rem;
+	box-shadow: 0 0.25rem 0.5rem rgba(26, 26, 44, 0.05);
+	padding: 2rem;
+	margin-top: 3rem;
+}
+
+.accountInfoRow p {
+	display: flex;
+	align-items: center;
+	margin-bottom: 1.15rem;
+}
+
+.accountInfoRow p span:first-child {
+	font-size: 1rem;
+	font-weight: 700;
+	flex: 0 0 20%;
+	margin-right: 2rem;
+	max-width: 200px;
+	font-weight: 700;
+}
+
+.accountInfoRow p span:first-child {
+	font-size: 1rem;
+	font-weight: 700;
+	flex: 0 0 20%;
+	margin-right: 2rem;
+	max-width: 200px;
+	font-weight: 700;
+}
+
+.accountInfoRow p span:nth-child(2) {
+	flex: 80% 1;
+}
+
+@media (max-width: 768px) {
+	.account__topContainer {
+		flex-direction: column;
+		align-items: flex-start;
+	}
+
+	.account__container .account__signOutButton {
+		position: absolute;
+		right: 0;
+		top: 40px;
+		transform: translateY(-50%);
+	}
+}
+
+@media (max-width: 600px) {
+	.accountInfoRow p {
+		display: block;
+	}
+
+	.accountInfoRow span {
+		display: block;
+	}
+
+	.accountInfoRow p span:nth-child(2) {
+		flex: 100% 1;
+		text-overflow: ellipsis;
+		overflow: hidden;
+		/* white-space: nowrap; */
+	}
+}
+
+@media (max-width: 550px) {
+	.account__container {
+		margin-inline: 1.5rem;
+		margin-top: 1rem;
+	}
+}

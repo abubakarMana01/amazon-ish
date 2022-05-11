@@ -16,7 +16,7 @@
 
 .orders__orderSummaryContainer {
 	display: grid;
-	grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+	grid-template-columns: repeat(auto-fit, minmax(280px, 320px));
 	gap: 1.5rem;
 }
 

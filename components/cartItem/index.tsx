@@ -2,13 +2,15 @@ import React, { useState } from "react";
 import styles from "./styles.module.css";
 import Image from "next/image";
 import Link from "next/link";
-import TextTruncate from "react-text-truncate";
 import { motion } from "framer-motion";
 import { RemoveShoppingCart } from "@mui/icons-material";
 import { Tooltip } from "@mui/material";
+import { axios } from "config";
+import { useRouter } from "next/router";
+import { useAppContext } from "contexts";
 
 type productTypes = {
-	id: string;
+	_id: string;
 	image: string;
 	price: string;
 	title: string;
@@ -17,11 +19,16 @@ type productTypes = {
 };
 
 interface IProps {
+	itemId: string;
 	data: productTypes;
+	quantity: number;
 }
 
-export default function CartItem({ data }: IProps) {
-	const [quantity, setQuantity] = useState(1);
+export default function CartItem({ itemId, data, quantity: q }: IProps) {
+	const router = useRouter();
+	const { cartItemsCount, setCartItemsCount } = useAppContext();
+
+	const [quantity, setQuantity] = useState(q);
 
 	const handleQuantityDecrease = () => {
 		if (quantity > 0) {
@@ -31,6 +38,28 @@ export default function CartItem({ data }: IProps) {
 
 	const handleQuantityIncrease = () => {
 		setQuantity((prev) => prev + 1);
+	};
+
+	const handleRemoveItem = async (id: string) => {
+		try {
+			const res = await axios.delete(`/cart/${id}`, {
+				headers: {
+					"x-auth-token": localStorage.getItem("token")!,
+				},
+			});
+			if (res.status === 200) {
+				setCartItemsCount(cartItemsCount - 1);
+				router.push("/cart");
+			}
+		} catch (err: any) {
+			if (err.response) {
+				alert("Failed. " + err.response.data.error.message);
+				console.log(err.response.data.error.message);
+			} else {
+				alert("Failed. " + err.message);
+				console.log(err.message);
+			}
+		}
 	};
 
 	return (
@@ -47,23 +76,13 @@ export default function CartItem({ data }: IProps) {
 					width="100%"
 					height="100%"
 					objectFit="contain"
-					alt="product image"
+					alt="Product"
 				/>
 			</div>
 
 			<div className={styles.product__details}>
-				<Link href={"/products/" + data.id}>
-					<a className={styles.product__name}>
-						{/* <TextTruncate
-              line={2}
-              element="p"
-              containerClassName={styles.product__name}
-              truncateText=""
-              text={data.title}
-            /> */}
-
-						{data.title}
-					</a>
+				<Link href={"/products/" + data._id}>
+					<a className={styles.product__name}>{data.title}</a>
 				</Link>
 
 				<div className={styles.product__priceAndQuantityContainer}>
@@ -75,7 +94,10 @@ export default function CartItem({ data }: IProps) {
 						<button onClick={handleQuantityIncrease}>+</button>
 					</div>
 					<Tooltip title="Remove from cart" placement="right" arrow color="red">
-						<div className={styles.product__removeItem}>
+						<div
+							className={styles.product__removeItem}
+							onClick={() => handleRemoveItem(data._id)}
+						>
 							<RemoveShoppingCart color="inherit" />
 						</div>
 					</Tooltip>
