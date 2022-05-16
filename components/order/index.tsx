@@ -7,28 +7,17 @@ interface IProps {
 		_id: string;
 		paymentMethod: string;
 		products: {
-			product: {
-				_id: string;
-				title: string;
-				image: string;
-				price: number;
-			};
+			_id: string;
+			description: string;
+			image: string;
 			quantity: number;
 		}[];
+		total_amount: number;
+		images: string[];
 	};
 }
 
 export default function Order({ data: order }: IProps) {
-	const [totalPrice, setTotalPrice] = useState(0);
-
-	useEffect(() => {
-		order.products.forEach((_) => {
-			setTotalPrice((prev: number) => prev + _.product.price * _.quantity);
-		});
-
-		// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, []);
-
 	return (
 		<article className={styles.orderSummary__container}>
 			<h2 className={styles.orderSummary__orderId}>
@@ -42,27 +31,27 @@ export default function Order({ data: order }: IProps) {
 			</p>
 
 			<div className={styles.orderSummary__itemsContainer}>
-				{order.products.map(({ product, quantity }) => (
+				{order.products.map((product, index) => (
 					<div key={product._id}>
 						<div className={styles.orderSummary__quantity}>
-							<span>x{quantity}</span>
+							<span>x{product.quantity}</span>
 						</div>
 						<div className={styles.orderSummary__imageContainer}>
 							<Image
-								src={product.image}
+								src={order.images[index]}
 								alt="product"
 								objectFit="contain"
 								layout="fill"
 							/>
 						</div>
-						<p>{product.title}</p>
+						<p>{product.description}</p>
 					</div>
 				))}
 			</div>
 
 			<div className={styles.orderSummary__amountContainer}>
 				<p>Amount</p>
-				{totalPrice && <h3>{`$${totalPrice}`}</h3>}
+				<h3>${order.total_amount / 100}</h3>
 			</div>
 		</article>
 	);

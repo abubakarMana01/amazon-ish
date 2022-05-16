@@ -109,7 +109,11 @@ export default function ProductDetail({
 
 		try {
 			if (isProductBookmarked) {
-				const res = await axios.delete(`/bookmarks/${id}`);
+				const res = await axios.delete(`/bookmarks/${id}`, {
+					headers: {
+						"x-auth-token": `${localStorage.getItem("token")}`,
+					},
+				});
 				if (res.status === 200) {
 					appContext.setBookmarkItemsCount(appContext.bookmarkItemsCount - 1);
 					setIsProductBookmarked(false);
@@ -159,7 +163,9 @@ export default function ProductDetail({
 
 				// Check if product is in bookmarks
 				try {
-					const res = await axios.get(`/bookmarks`);
+					const res = await axios.get(`/bookmarks`, {
+						headers: { "x-auth-token": localStorage.getItem("token")! },
+					});
 
 					const isBookmarked = res.data.find((_: any) => _.bookmark._id === id);
 					isBookmarked

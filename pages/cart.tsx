@@ -38,37 +38,29 @@ export default function Cart({ products, error }: IProps) {
 	}, [appContext.user, products.length]);
 
 	const handlePayment = async () => {
-		const line_items = products.map((_: any) => {
-			return {
-				price_data: {
-					currency: "usd",
-					product_data: {
-						name: _.product.title,
-					},
-					unit_amount: _.product.price * 100,
-				},
-				quantity: _.quantity,
-			};
-		});
+		const requestBody = products.map((_: any) => ({
+			productId: _.product._id,
+			quantity: _.quantity,
+		}));
 
 		try {
-			const res = await axios.post("/create-checkout-session", {
-				line_items,
-			});
-
-			const stripe = await loadStripe(
-				"pk_test_51Kx0zsGyK2R9R1TNGC5qy3Nh04Dxskl4koOswY913ok8L0PaighXg1Iw50tzcogVjdcx7HMa8SLG494QXrOP5Q6d00OJwkTn8v"
+			const res = await axios.post(
+				"/pay/create-checkout-session",
+				{
+					items: requestBody,
+				},
+				{
+					headers: {
+						"x-auth-token": `${localStorage.getItem("token")}`,
+					},
+				}
 			);
+			const stripe = await loadStripe(`${process.env.NEXT_PUBLIC_STRIPE_KEY}`);
 			await stripe?.redirectToCheckout({
 				sessionId: res.data.id,
+				// billingAddressCollection: "required",
+				// clientReferenceId: `${localStorage.getItem("token")}`,
 			});
-
-			// const addToOrderRes = await axios.post("/orders", {
-			// 	paymentMethod: "card",
-			// 	products: [{ product: "626e7e8f91e29f6492763b31", quantity: 2 }],
-			// });
-
-			// TODO: Add product to orders after payment
 		} catch (err: any) {
 			if (err.response) {
 				console.log(err.response.data.error.message);

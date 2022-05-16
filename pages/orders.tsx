@@ -60,7 +60,7 @@ export async function getServerSideProps() {
 					"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2Mjc2OGY4OTQxYzJiNzdlNDVkMTRlYmYiLCJpYXQiOjE2NTE5MzcxNjF9.kbzUY1ZRHLb91mI1xjPdIGDL3M1NzPuBg4V3x_rDVeY",
 			},
 		});
-		orders = await res.data;
+		orders = res.data;
 	} catch (err: any) {
 		console.log(err.message);
 		error = JSON.stringify(err);

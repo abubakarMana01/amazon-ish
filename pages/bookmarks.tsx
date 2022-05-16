@@ -22,6 +22,7 @@ export default function Bookmarks({ bookmarkedProducts, error }: IProps) {
 		if (appContext.user)
 			appContext.setBookmarkItemsCount(bookmarkedProducts.length);
 		else appContext.setBookmarkItemsCount(0);
+		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, []);
 
 	return (

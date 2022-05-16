@@ -21,7 +21,7 @@
 }
 
 .bookmarks__emptyImageWrapper {
-	flex: 0.5;
+	flex: 0.55;
 	padding: 2rem;
 }
 
@@ -31,7 +31,7 @@
 }
 
 .bookmarks__emptyMessageContainer {
-	flex: 0.5;
+	flex: 0.45;
 	background: var(--color-white);
 	margin-left: 2rem;
 	border-radius: 0.5rem;

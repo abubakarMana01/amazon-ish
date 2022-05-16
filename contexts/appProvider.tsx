@@ -48,7 +48,7 @@ export default function AppProvider({ children }: { children: JSX.Element }) {
 				setBookmarkItemsCount(bookmarksRes.data.length);
 			} catch (err: any) {
 				if (err.response) {
-					console.log(err.response.data.error.message);
+					console.log(err.response.data?.error.message);
 				} else {
 					console.log(err.message);
 				}

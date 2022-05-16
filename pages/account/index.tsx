@@ -13,6 +13,8 @@ function Account() {
 
 	useEffect(() => {
 		if (!user) router.replace("/account/login");
+
+		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, []);
 
 	const handleSignOut = () => {
