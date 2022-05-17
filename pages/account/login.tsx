@@ -31,7 +31,7 @@ export default function Login() {
 			appContext.setUser(jwtDecode(res.data.token));
 		} catch (err: any) {
 			alert("Something went wrong");
-			if (err.response.data) {
+			if (err.response) {
 				console.log(err.response.data.error.message);
 			} else {
 				console.log(err.message);
