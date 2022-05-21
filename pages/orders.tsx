@@ -55,7 +55,7 @@ export default function Orders() {
 					</section>
 				)}
 
-				{!error && !orders.length && (
+				{!error && !orders.length && !isLoading && (
 					<>
 						<p className={styles.orders__noOrderTitle}>
 							You&apos;ve not made any orders
