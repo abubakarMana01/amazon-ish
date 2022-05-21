@@ -12,20 +12,33 @@ import { loadStripe } from "@stripe/stripe-js";
 
 interface IProps {
 	products: [];
-	error: any;
+	error: string | null;
 }
 
-export default function Cart({ products, error }: IProps) {
+export default function Cart() {
 	const router = useRouter();
+
+	const [products, setProducts] = useState<[]>([]);
+	const [error, setError] = useState<string | null>(null);
+	const [isLoading, setIsLoading] = useState(true);
 
 	const appContext = useAppContext();
 	const [totalPrice, setTotalPrice] = useState(0);
 	const [numberOfItems, setNumberOfItems] = useState(0);
 
 	useEffect(() => {
-		if (appContext.user) appContext.setCartItemsCount(products.length);
-		else appContext.setCartItemsCount(0);
+		if (!appContext.user) return;
 
+		(async () => {
+			setIsLoading(true);
+			const { products, error } = await fetchCart();
+			setProducts(products);
+			setError(error);
+			setIsLoading(false);
+		})();
+	}, []);
+
+	useEffect(() => {
 		setTotalPrice(0);
 		setNumberOfItems(0);
 
@@ -82,51 +95,59 @@ export default function Cart({ products, error }: IProps) {
 			>
 				<h1>Your Cart</h1>
 
-				{error ? (
-					<h3>An error occured. {error}</h3>
-				) : (
+				{error && <h3>An error occured. {error}</h3>}
+
+				{!error && (
 					<div className={styles.cart__contentContainer}>
 						<div
 							className={`${styles.cart__leftContainer} ${
 								!products.length && styles.cart__leftContainerEmpty
 							}`}
 						>
-							{(!appContext.user || !products.length) && (
+							{(!appContext.user || (!isLoading && !products.length)) && (
 								<div className={styles.cart__emptyImageContainer}>
-									<Image layout="fill" src={emptyCartImage} alt="empty-cart" />
+									<Image
+										layout="fill"
+										src={emptyCartImage}
+										alt="empty-cart"
+										priority
+									/>
 								</div>
 							)}
 
-							{!appContext.user ||
-								(products.length !== 0 && (
-									<div className={styles.cart__productsContainer}>
-										{products.map((_: any) => (
-											<CartItem
-												itemId={_._id}
-												key={_._id}
-												data={_.product}
-												quantity={_.quantity}
-											/>
-										))}
-									</div>
-								))}
+							{products.length !== 0 && (
+								<div className={styles.cart__productsContainer}>
+									{products.map((_: any) => (
+										<CartItem
+											itemId={_._id}
+											key={_._id}
+											data={_.product}
+											quantity={_.quantity}
+											allProducts={products}
+											setAllProducts={setProducts}
+										/>
+									))}
+								</div>
+							)}
 						</div>
 
-						<div className={styles.cart__rightContainer}>
-							{!appContext.user || products.length === 0 ? (
-								<>
-									<h2>Your cart feels lonely.</h2>
-									<p style={{ marginBottom: "3rem" }}>
-										Your shopping cart lives to serve. Give it purpose - fill it
-										with books, electronics, videos, etc. and make it happy.
-									</p>
+						{(!appContext.user || (!products.length && !isLoading)) && (
+							<div className={styles.cart__rightContainer}>
+								<h2>Your cart feels lonely.</h2>
+								<p style={{ marginBottom: "3rem" }}>
+									Your shopping cart lives to serve. Give it purpose - fill it
+									with books, electronics, videos, etc. and make it happy.
+								</p>
 
-									<Button
-										title="Continue shopping"
-										handleClick={() => router.push("/")}
-									/>
-								</>
-							) : (
+								<Button
+									title="Continue shopping"
+									handleClick={() => router.push("/")}
+								/>
+							</div>
+						)}
+
+						{appContext.user && products.length !== 0 && (
+							<div className={styles.cart__rightContainer}>
 								<div className={styles.cart__details}>
 									<h2>Checkout</h2>
 
@@ -149,8 +170,8 @@ export default function Cart({ products, error }: IProps) {
 										handleClick={handlePayment}
 									/>
 								</div>
-							)}
-						</div>
+							</div>
+						)}
 					</div>
 				)}
 			</motion.section>
@@ -158,16 +179,14 @@ export default function Cart({ products, error }: IProps) {
 	);
 }
 
-export async function getServerSideProps() {
+async function fetchCart() {
 	let products = [];
 	let error = null;
 
 	try {
 		const res = await axios.get("/cart", {
 			headers: {
-				"x-auth-token":
-					// "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2Mjc2YTAyOGNhMjE0M2I2Yzg2NGQ2YTMiLCJpYXQiOjE2NTE5NDE2MDR9.6Ne8AAvhuSg1r01vpJ-zIgA6kV30hd4yh_v4LP_RFnc",
-					"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2Mjc2OGY4OTQxYzJiNzdlNDVkMTRlYmYiLCJpYXQiOjE2NTE5MzcxNjF9.kbzUY1ZRHLb91mI1xjPdIGDL3M1NzPuBg4V3x_rDVeY",
+				"x-auth-token": localStorage.getItem("token")!,
 			},
 		});
 		products = res.data;
@@ -181,10 +200,36 @@ export async function getServerSideProps() {
 		}
 	}
 
-	return {
-		props: {
-			products,
-			error,
-		},
-	};
+	return { products, error };
 }
+
+// export async function getServerSideProps() {
+// 	let products = [];
+// 	let error = null;
+
+// 	try {
+// 		const res = await axios.get("/cart", {
+// 			headers: {
+// 				"x-auth-token":
+// 					// "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2Mjc2YTAyOGNhMjE0M2I2Yzg2NGQ2YTMiLCJpYXQiOjE2NTE5NDE2MDR9.6Ne8AAvhuSg1r01vpJ-zIgA6kV30hd4yh_v4LP_RFnc",
+// 					"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2Mjc2OGY4OTQxYzJiNzdlNDVkMTRlYmYiLCJpYXQiOjE2NTE5MzcxNjF9.kbzUY1ZRHLb91mI1xjPdIGDL3M1NzPuBg4V3x_rDVeY",
+// 			},
+// 		});
+// 		products = res.data;
+// 	} catch (err: any) {
+// 		if (err.response) {
+// 			console.log(err.response.data.error.message);
+// 			error = JSON.stringify(err.response.data.error.message);
+// 		} else {
+// 			console.log(err.message);
+// 			error = JSON.stringify(err.message);
+// 		}
+// 	}
+
+// 	return {
+// 		props: {
+// 			products,
+// 			error,
+// 		},
+// 	};
+// }

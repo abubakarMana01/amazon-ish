@@ -16,6 +16,7 @@ import { motion } from "framer-motion";
 import { axios } from "config";
 import { useRouter } from "next/router";
 import { useAppContext } from "contexts";
+import Image from "next/image";
 
 interface IProps {
 	id: string;
@@ -191,10 +192,18 @@ export default function ProductDetail({
 			>
 				<div>
 					<div className={styles.productDetail__imageContainer}>
-						<img
+						{/* <img
 							src={product.image}
 							alt={"Image of " + product.title}
+							loading="eager"
 							style={{ objectFit: "contain", width: "100%", height: "100%" }}
+						/> */}
+						<Image
+							src={product.image}
+							alt={"Image of " + product.title}
+							priority
+							layout="fill"
+							objectFit="contain"
 						/>
 					</div>
 				</div>

@@ -22,9 +22,17 @@ interface IProps {
 	itemId: string;
 	data: productTypes;
 	quantity: number;
+	allProducts: [];
+	setAllProducts: (products: []) => void;
 }
 
-export default function CartItem({ itemId, data, quantity: q }: IProps) {
+export default function CartItem({
+	itemId,
+	data,
+	quantity: q,
+	allProducts,
+	setAllProducts,
+}: IProps) {
 	const router = useRouter();
 	const { cartItemsCount, setCartItemsCount } = useAppContext();
 
@@ -47,9 +55,15 @@ export default function CartItem({ itemId, data, quantity: q }: IProps) {
 					"x-auth-token": localStorage.getItem("token")!,
 				},
 			});
+
 			if (res.status === 200) {
 				setCartItemsCount(cartItemsCount - 1);
-				router.push("/cart");
+				router.replace("/cart");
+
+				const newProducts: any = allProducts.filter(
+					(_: any) => _.product._id !== id
+				);
+				setAllProducts(newProducts);
 			}
 		} catch (err: any) {
 			if (err.response) {
